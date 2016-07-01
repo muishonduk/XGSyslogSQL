@@ -1,0 +1,153 @@
+-- Empty database 'XGLogging' should already exist
+
+USE [XGLogging]
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[ContentFilter](
+	[id] [bigint] IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	[device_id] [varchar](20) NOT NULL,
+	[datet] [datetime] NOT NULL,
+	[timezone] [varchar](5) NOT NULL,
+	[log_id] [varchar](20) NULL,
+	[log_component] [varchar](20) NULL,
+	[log_subtype] [varchar](20) NULL,
+	[status] [varchar](20) NULL,
+	[priority] [varchar](20) NULL,
+	[fw_rule_id] [int] NULL,
+	[user_name] [varchar](20) NULL,
+	[user_gp] [varchar](30) NULL,
+	[application_filter_policy] [int] NULL,
+	[application_name] [varchar](30) SPARSE  NULL,
+	[application_risk] [int] NULL,
+	[application_technology] [varchar](20) SPARSE  NULL,
+	[application_category] [varchar](20) SPARSE  NULL,
+	[src_country_code] [varchar](10) SPARSE  NULL,
+	[dst_country_code] [varchar](10) SPARSE  NULL,
+	[iap] [int] NULL,
+	[category] [varchar](30) NULL,
+	[category_type] [varchar](20) NULL,
+	[url] [varchar](max) NULL,
+	[contenttype] [varchar](150) NULL,
+	[override_token] [varchar](20) NULL,
+	[httpresponsecode] [varchar](20) NULL,
+	[src_ip] [varchar](48) NULL,
+	[dst_ip] [varchar](48) NULL,
+	[protocol] [varchar](10) NULL,
+	[src_port] [int] NULL,
+	[dst_port] [int] NULL,
+	[sent_bytes] [int] NULL,
+	[recv_bytes] [int] NULL,
+	[domain] [varchar](200) NULL,
+	[otherdata] [varchar](max) SPARSE  NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[SecurityPolicy](
+	[id] [bigint] IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	[device_id] [varchar](20) NOT NULL,
+	[datet] [datetime] NOT NULL,
+	[timezone] [varchar](5) NOT NULL,
+	[log_id] [varchar](20) NULL,
+	[log_component] [varchar](20) NULL,
+	[log_subtype] [varchar](20) NULL,
+	[status] [varchar](20) NULL,
+	[priority] [varchar](20) NULL,
+	[duration] [int] NULL,
+	[fw_rule_id] [int] NULL,
+	[policy_type] [int] NULL,
+	[user_name] [varchar](20) NULL,
+	[user_gp] [varchar](30) NULL,
+	[iap] [int] NULL,
+	[ips_policy_id] [int] NULL,
+	[appfilter_policy_id] [int] NULL,
+	[application] [varchar](50) NULL,
+	[application_risk] [int] NULL,
+	[application_technology] [varchar](50) NULL,
+	[application_category] [varchar](50) NULL,
+	[in_interface] [varchar](20) NULL,
+	[out_interface] [varchar](20) NULL,
+	[src_mac] [varchar](48) NULL,
+	[src_ip] [varchar](48) NULL,
+	[src_country_code] [varchar](10) NULL,
+	[dst_ip] [varchar](48) NULL,
+	[dst_country_code] [varchar](10) NULL,
+	[protocol] [varchar](10) NULL,
+	[src_port] [int] NULL,
+	[dst_port] [int] NULL,
+	[sent_pkts] [int] NULL,
+	[recv_pkts] [int] NULL,
+	[sent_bytes] [int] NULL,
+	[recv_bytes] [int] NULL,
+	[tran_src_ip] [varchar](48) NULL,
+	[tran_src_port] [int] NULL,
+	[tran_dst_ip] [varchar](48) NULL,
+	[tran_dst_port] [int] NULL,
+	[srczone] [varchar](20) NULL,
+	[dstzone] [varchar](20) NULL,
+	[dir_disp] [varchar](20) NULL,
+	[connid] [varchar](20) NULL,
+	[vconnid] [varchar](20) NULL,
+	[hb_health] [varchar](20) NULL,
+	[otherdata] [varchar](max) SPARSE  NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[OtherLog](
+	[id] [bigint] IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	[device_id] [varchar](20) NOT NULL,
+	[datet] [datetime] NOT NULL,
+	[timezone] [varchar](5) NOT NULL,
+	[log_id] [varchar](20) NULL,
+	[log_type] [varchar](20) NOT NULL,
+	[log_component] [varchar](20) NULL,
+	[log_subtype] [varchar](20) NULL,
+	[status] [varchar](20) NULL,
+	[priority] [varchar](20) NULL,
+	[user_name] [varchar](20) NULL,
+	[rawdata] [varchar](max) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+
+-- Datetime indexes
+CREATE NONCLUSTERED INDEX [IX_ContentFilterDate] ON [dbo].[ContentFilter] 
+(
+	[datet] ASC
+)
+go
+
+CREATE NONCLUSTERED INDEX [IX_SecurityPolicyDate] ON [dbo].[SecurityPolicy] 
+(
+	[datet] ASC
+)
+go
+
+CREATE NONCLUSTERED INDEX [IX_OtherLogDate] ON [dbo].[OtherLog] 
+(
+	[datet] ASC
+)
+go

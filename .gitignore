@@ -1,0 +1,12 @@
+bin/
+obj/
+*.suo
+*.obj
+*.exe
+*.pdb
+*.user
+*.suo
+debug*/
+release*/
+thumbs.db
+/packages
